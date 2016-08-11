@@ -1,13 +1,13 @@
 {
   "name": "react-interactive",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Interactive React component",
   "main": "dist/index.js",
   "scripts": {
-		"build": "start ./scripts/build.sh",
-		"build-demo": "start ./scripts/build-demo.sh",
-		"lint": "eslint ./src/**/*.js",
-		"prepublish": "npm run lint && npm run build && npm run build-demo"
+    "build": "start ./scripts/build.sh",
+    "build-demo": "start ./scripts/build-demo.sh",
+    "lint": "eslint ./src/**/*.js",
+    "prepublish": "npm run lint && npm run build && npm run build-demo"
   },
   "keywords": [
     "react",
@@ -38,7 +38,7 @@
     "eslint-plugin-react": "^6.0.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
-		"html-webpack-plugin": "^2.22.0"
+    "html-webpack-plugin": "^2.22.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
