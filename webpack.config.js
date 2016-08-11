@@ -20,7 +20,7 @@ module.exports = {
 		}
 	}],
 	output: {
-		library: 'ReactInteractive'
+		library: 'ReactFloating'
 	},
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),

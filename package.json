@@ -1,7 +1,7 @@
 {
-  "name": "react-interactive",
+  "name": "react-floating",
   "version": "1.0.0",
-  "description": "Interactive React component",
+  "description": "Floating React component",
   "main": "lib/index.js",
   "scripts": {
     "build": "start ./scripts/build.sh",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:z4o4z/react-interactive.git"
+    "url": "git@github.com:z4o4z/react-floating.git"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
@@ -41,7 +41,6 @@
     "html-webpack-plugin": "^2.22.0"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
     "raf": "^3.2.0",
     "react-addons-shallow-compare": "^15.3.0"
   },

@@ -1,9 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
-import cns from 'classnames';
 import 'raf';
 
-export default class Interactive extends Component {
+export default class Floating extends Component {
 	static propTypes = {
 		maxMobileRange: PropTypes.number.isRequired,
 		maxRange: PropTypes.number.isRequired,
@@ -17,9 +16,9 @@ export default class Interactive extends Component {
 	render() {
 		return (
 			<div
-				className={cns('c-interactive', this.props.className)}
+				className={this.props.className}
 				style={this.props.style}
-				ref="interactive"
+				ref="floating"
 			>
 				{this.props.children || null}
 			</div>
@@ -48,8 +47,8 @@ export default class Interactive extends Component {
 		window.removeEventListener('deviceorientation', this.onDeviceOrientation);
 	}
 
-	addInteractiveToElement(x, y, z) {
-		if (!this.refs.interactive) {
+	addFloatingToElement(x, y, z) {
+		if (!this.refs.floating) {
 			return;
 		}
 
@@ -65,8 +64,8 @@ export default class Interactive extends Component {
 			transform += ` scale(${this.props.scale})`;
 		}
 
-		this.refs.interactive.style.WebkitTransform = transform;
-		this.refs.interactive.style.transform = transform;
+		this.refs.floating.style.WebkitTransform = transform;
+		this.refs.floating.style.transform = transform;
 	}
 
 	// beta = x [-180; 180];
@@ -79,14 +78,14 @@ export default class Interactive extends Component {
 			let translateY;
 
 			if (window.orientation) {
-				translateX = Interactive.getDegreeSin(beta) * maxMobileRange;
-				translateY = Interactive.getDegreeSin(gamma * 2) * maxMobileRange;
+				translateX = Floating.getDegreeSin(beta) * maxMobileRange;
+				translateY = Floating.getDegreeSin(gamma * 2) * maxMobileRange;
 			} else {
-				translateX = Interactive.getDegreeSin(gamma * 2) * maxMobileRange;
-				translateY = Interactive.getDegreeSin(beta) * maxMobileRange;
+				translateX = Floating.getDegreeSin(gamma * 2) * maxMobileRange;
+				translateY = Floating.getDegreeSin(beta) * maxMobileRange;
 			}
 
-			this.addInteractiveToElement(translateX, translateY, 0);
+			this.addFloatingToElement(translateX, translateY, 0);
 		});
 	};
 
@@ -95,13 +94,13 @@ export default class Interactive extends Component {
 			let translateX = this.state.percentTranslateX * (clientX - this.state.elementLeft - this.state.halfElementWidth);
 			let translateY = this.state.percentTranslateY * (clientY - this.state.elementTop - this.state.halfElementHeight);
 
-			this.addInteractiveToElement(translateX, translateY, 0);
+			this.addFloatingToElement(translateX, translateY, 0);
 		});
 	};
 
 	onResize = () => {
-		let node = this.refs.interactive;
-		let {top, left} = Interactive.getElementOffset(node);
+		let node = this.refs.floating;
+		let {top, left} = Floating.getElementOffset(node);
 
 		this.setState({
 			percentTranslateX: this.props.maxRange / (window.innerWidth / 2),

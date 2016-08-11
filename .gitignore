@@ -1,5 +1,5 @@
 .idea
 node_modules
-dist/ReactInteractive.js
-dist/ReactInteractive.min.js
+dist/ReactFloating.js
+dist/ReactFloating.min.js
 lib
