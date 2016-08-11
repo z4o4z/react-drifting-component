@@ -1,3 +1,5 @@
 .idea
 node_modules
-dist
+dist/ReactInteractive.js
+dist/ReactInteractive.min.js
+lib
