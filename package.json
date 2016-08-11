@@ -2,7 +2,7 @@
   "name": "react-interactive",
   "version": "1.0.0",
   "description": "Interactive React component",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "start ./scripts/build.sh",
     "build-demo": "start ./scripts/build-demo.sh",
