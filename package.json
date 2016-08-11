@@ -7,7 +7,7 @@
     "build": "start ./scripts/build.sh",
     "build-demo": "start ./scripts/build-demo.sh",
     "lint": "eslint ./src/**/*.js",
-    "prepublish": "npm run lint && npm run build && npm run build-demo"
+    "_prepublish": "npm run lint && npm run build"
   },
   "keywords": [
     "react",
