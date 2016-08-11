@@ -14,7 +14,8 @@
     "reactjs",
     "javascript",
     "react-component",
-    "interactive",
+    "floating",
+    "floating-component",
     "mousemoove",
     "deviceorientation"
   ],
