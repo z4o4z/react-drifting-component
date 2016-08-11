@@ -18,7 +18,7 @@ ReactDOM.render(
 			<img src="http://pre14.deviantart.net/014b/th/pre/i/2012/235/6/1/meteorit_by_morsprinstock-d5c5tix.png"/>
 		</Floating>
 		<Floating maxRange={20} maxMobileRange={20} className="msg">
-			<p>React Floating</p>
+			<p>React <br /> Floating</p>
 		</Floating>
 	</div>,
 	root
