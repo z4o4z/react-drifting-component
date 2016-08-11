@@ -6,7 +6,7 @@
   "scripts": {
 		"build": "start ./scripts/build.sh",
 		"build-demo": "start ./scripts/build-demo.sh",
-		"lint": "eslint .",
+		"lint": "eslint ./src/**/*.js",
 		"prepublish": "npm run lint && npm run build && npm run build-demo"
   },
   "keywords": [

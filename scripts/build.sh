@@ -8,4 +8,4 @@ rm dist/ReactInteractive.min.js
 
 # build ES5 modules to lib
 rm -rf lib
-./node_modules/.bin/babel src/index.js --out-dir lib
+./node_modules/.bin/babel src --out-dir lib --ignore src/demo
