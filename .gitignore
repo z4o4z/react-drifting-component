@@ -3,4 +3,3 @@ node_modules
 .vscode
 lib/react-drifting-component.js
 lib/react-drifting-component.prod.js
-storybook-static
