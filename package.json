@@ -1,19 +1,15 @@
 {
   "name": "react-drifting-component",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Drifting react component",
   "main": "lib/index.js",
   "scripts": {
     "clear": "rm ./lib/react-drifting-component.*",
-
     "lint": "eslint -c ./.eslintrc . ",
     "format": "prettier-eslint --write \"src/index.js\" \"stories/index.js\"",
-
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "babel ./src/index.js --out-file ./lib/react-drifting-component.js",
-    "build:prod":
-      "NODE_ENV=production babel ./src/index.js --out-file ./lib/react-drifting-component.prod.js",
-
+    "build:prod": "NODE_ENV=production babel ./src/index.js --out-file ./lib/react-drifting-component.prod.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
