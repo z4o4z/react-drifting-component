@@ -1,0 +1,81 @@
+.wrapper,
+.background,
+.text-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.background {
+  top: -40px;
+  left: -40px;
+  right: -40px;
+  bottom: -40px;
+  background-size: cover;
+  background-image: url(https://verdict4u.files.wordpress.com/2016/09/google-now-wallpaper-1.png);
+  background-position: center;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+  font-family: Helvetica, Arial, sans-serif;
+  transform: translate(-50%, -50%);
+}
+
+.emoji-1 {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  color: #fff;
+  font-size: 90px;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.emoji-2 {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 70%;
+  left: 70%;
+  color: #fff;
+  font-size: 120px;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+  font-family: Helvetica, Arial, sans-serif;
+  transform: scaleX(-1);
+}
+
+.emoji-3 {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  color: #fff;
+  font-size: 120px;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+  font-family: Helvetica, Arial, sans-serif;
+  transform: scaleX(-1);
+}
+
+.emoji-4 {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0%;
+  left: 90%;
+  color: #fff;
+  font-size: 100px;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+  font-family: Helvetica, Arial, sans-serif;
+}

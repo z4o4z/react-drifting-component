@@ -1,5 +1,6 @@
-.idea
 node_modules
-dist/ReactFloating.js
-dist/ReactFloating.min.js
-lib
+.DS_Store
+.vscode
+lib/react-drifting-component.js
+lib/react-drifting-component.prod.js
+storybook-static

@@ -1,4 +1,19 @@
 {
-  "presets": ['react', 'es2015', 'stage-1'],
-  "plugins": ['transform-runtime']
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["last 2 versions", "ie >= 10"]
+        }
+      }
+    ],
+    "react"
+  ],
+  "plugins": ["transform-object-rest-spread", "transform-class-properties", "transform-runtime"],
+  "env": {
+    "production": {
+      "plugins": ["transform-react-remove-prop-types"]
+    }
+  }
 }

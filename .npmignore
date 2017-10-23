@@ -1,5 +1,6 @@
 src
-scripts
-webpack.config.js
 .babelrc
 .eslintrc
+.storybook
+.eslintignore
+.editorconfig

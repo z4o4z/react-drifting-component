@@ -1,134 +1,104 @@
-import React, {Component, PropTypes} from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
-import 'raf';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default class Floating extends Component {
-	static propTypes = {
-		maxMobileRange: PropTypes.number.isRequired,
-		maxRange: PropTypes.number.isRequired,
-		className: PropTypes.string,
-		children: PropTypes.any,
-		reverse: PropTypes.bool,
-		scale: PropTypes.number,
-		style: PropTypes.object
-	};
+const getDegreeSin = degree => Math.sin(Math.PI * degree / 180);
 
-	render() {
-		return (
-			<div
-				className={this.props.className}
-				style={this.props.style}
-				ref="floating"
-			>
-				{this.props.children || null}
-			</div>
-		);
-	}
+export default class DriftingComponent extends Component {
+  static propTypes = {
+    reverse: PropTypes.bool,
+    children: PropTypes.func.isRequired,
+    maxRange: PropTypes.number.isRequired,
+    maxMobileRange: PropTypes.number.isRequired,
+  };
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return shallowCompare(this, nextProps, nextState);
-	}
+  static defaultProps = {
+    reverse: false,
+  };
 
-	componentDidMount() {
-		this.onResize();
+  state = {
+    pos: { x: 0, y: 0 },
+    top: null,
+    left: null,
+    factorX: null,
+    factorY: null,
+    halfWidth: null,
+    halfHeight: null,
+  };
 
-		window.addEventListener('deviceorientation', this.onDeviceOrientation);
-		window.addEventListener('mousemove', this.onMouseMove);
-		window.addEventListener('resize', this.onResize);
-	}
+  node = null;
 
-	componentWillUnmount() {
-		if (this.frame) {
-			cancelAnimationFrame(this.frame);
-		}
+  frame = null;
 
-		window.removeEventListener('resize', this.onResize);
-		window.removeEventListener('mousemove', this.onMouseMove);
-		window.removeEventListener('deviceorientation', this.onDeviceOrientation);
-	}
+  componentDidMount() {
+    this.onResize();
 
-	addFloatingToElement(x, y, z) {
-		if (!this.refs.floating) {
-			return;
-		}
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('mousemove', this.onMouseMove);
+    window.addEventListener('deviceorientation', this.onDeviceOrientation);
+  }
 
-		if (this.props.reverse) {
-			x = -x;
-			y = -y;
-			z = -z;
-		}
+  componentWillUnmount() {
+    if (this.frame) {
+      cancelAnimationFrame(this.frame);
+    }
 
-		let transform = `translateX(${x}px) translateY(${y}px) translateZ(${z}px)`;
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('mousemove', this.onMouseMove);
+    window.removeEventListener('deviceorientation', this.onDeviceOrientation);
+  }
 
-		if (this.props.scale) {
-			transform += ` scale(${this.props.scale})`;
-		}
+  onRef = (node) => {
+    this.node = node;
+  };
 
-		this.refs.floating.style.WebkitTransform = transform;
-		this.refs.floating.style.transform = transform;
-	}
+  onResize = () => {
+    const { top, left } = this.node.getBoundingClientRect();
 
-	// beta = x [-180; 180];
-	// gamma = y [-90; 90];
-	// alpha = z [0; 360];
-	onDeviceOrientation = ({beta, gamma}) => {
-		this.frame = requestAnimationFrame(() => {
-			let maxMobileRange = this.props.maxMobileRange;
-			let translateX;
-			let translateY;
+    this.setState({
+      top,
+      left,
+      factorX: this.props.maxRange / (window.innerWidth / 2) * (this.props.reverse ? -1 : 1),
+      factorY: this.props.maxRange / (window.innerHeight / 2) * (this.props.reverse ? -1 : 1),
+      halfWidth: this.node.offsetWidth / 2,
+      halfHeight: this.node.offsetHeight / 2,
+    });
+  };
 
-			if (window.orientation) {
-				translateX = Floating.getDegreeSin(beta) * maxMobileRange;
-				translateY = Floating.getDegreeSin(gamma * 2) * maxMobileRange;
-			} else {
-				translateX = Floating.getDegreeSin(gamma * 2) * maxMobileRange;
-				translateY = Floating.getDegreeSin(beta) * maxMobileRange;
-			}
+  // beta = x [-180; 180];
+  // gamma = y [-90; 90];
+  // alpha = z [0; 360];
+  onDeviceOrientation = ({ beta, gamma }) => {
+    this.frame = requestAnimationFrame(() => {
+      const maxMobileRange = this.props.maxMobileRange * (this.props.reverse ? -1 : 1);
+      const pos = { x: 0, y: 0 };
 
-			this.addFloatingToElement(translateX, translateY, 0);
-		});
-	};
+      if (window.orientation) {
+        pos.x = getDegreeSin(beta) * maxMobileRange;
+        pos.y = getDegreeSin(gamma * 2) * maxMobileRange;
+      } else {
+        pos.x = getDegreeSin(gamma * 2) * maxMobileRange;
+        pos.y = getDegreeSin(beta) * maxMobileRange;
+      }
 
-	onMouseMove = ({clientX, clientY}) => {
-		this.frame = requestAnimationFrame(() => {
-			let translateX = this.state.percentTranslateX * (clientX - this.state.elementLeft - this.state.halfElementWidth);
-			let translateY = this.state.percentTranslateY * (clientY - this.state.elementTop - this.state.halfElementHeight);
+      this.setState({ pos });
+    });
+  };
 
-			this.addFloatingToElement(translateX, translateY, 0);
-		});
-	};
+  onMouseMove = ({ clientX, clientY }) => {
+    this.frame = requestAnimationFrame(() => {
+      const pos = {
+        x: this.state.factorX * (clientX - this.state.left - this.state.halfWidth),
+        y: this.state.factorY * (clientY - this.state.top - this.state.halfHeight),
+      };
 
-	onResize = () => {
-		let node = this.refs.floating;
-		let {top, left} = Floating.getElementOffset(node);
+      this.setState({ pos });
+    });
+  };
 
-		this.setState({
-			percentTranslateX: this.props.maxRange / (window.innerWidth / 2),
-			percentTranslateY: this.props.maxRange / (window.innerHeight / 2),
-			elementTop: top,
-			elementLeft: left,
-			halfElementWidth: node.offsetWidth / 2,
-			halfElementHeight: node.offsetHeight / 2
-		});
-	};
-
-	static getDegreeSin(degree) {
-		return Number(Math.sin(Math.PI * degree / 180).toFixed(3));
-	}
-
-	static getElementOffset(elem) {
-		let top = 0;
-		let left = 0;
-
-		while (elem) {
-			top += parseFloat(elem.offsetTop);
-			left += parseFloat(elem.offsetLeft);
-			elem = elem.offsetParent;
-		}
-
-		return {
-			top: Math.round(top),
-			left: Math.round(left)
-		};
-	}
+  render() {
+    return this.props.children({
+      pos: this.state.pos,
+      onRef: this.onRef,
+    });
+  }
 }
