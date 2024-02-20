@@ -1,9 +1,11 @@
 src
 demo
+storybook-static
 build/drifting.story.js
 build/tsconfig.build.tsbuildinfo
 .eslintrc
 .storybook
+.github
 .eslintignore
 .editorconfig
 .gitignore
