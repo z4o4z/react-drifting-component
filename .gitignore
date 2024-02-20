@@ -1,5 +1,0 @@
-node_modules
-.DS_Store
-.vscode
-lib/react-drifting-component.js
-lib/react-drifting-component.prod.js
