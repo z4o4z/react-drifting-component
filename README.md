@@ -12,7 +12,7 @@ $ npm install react-drifting-component
 
 ## Demo
 
-[Try it out](https://z4o4z.github.io/react-drifting-component/storybook-static/index.html)
+[Try it out](https://z4o4z.github.io/react-drifting-component/)
 
 ![](./demo/demo.gif)
 
