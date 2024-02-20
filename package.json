@@ -2,7 +2,7 @@
   "name": "react-drifting-component",
   "version": "3.0.0",
   "description": "Drifting react component",
-  "main": "lib/index.js",
+  "main": "build/index.js",
   "scripts": {
     "clear": "rm ./build",
     "lint": "eslint -c ./.eslintrc .",
