@@ -19,22 +19,22 @@ $ npm install react-drifting-component
 ## Basic Usage
 
 ```js
-import DriftingComponent from 'react-drifting-component';
+import { Drifting } from 'react-drifting-component';
 
 // Inside of a component's render() method:
 render() {
   return (
     <Wrapper>
-      <DriftingComponent maxRange={15} maxMobileRange={15}>
-        {({ pos, onRef }) => <Background x={pos.x} y={pos.y} onRef={onRef} />}
-      </DriftingComponent>
+      <Drifting maxMouseRange={15} maxOrientationRange={15}>
+        {({ ref }) => <Background ref={ref} />}
+      </Drifting>
 
-      <DriftingComponent maxRange={50} maxMobileRange={20} reverse>
+      <Drifting maxMouseRange={50} maxOrientationRange={20} reverse>
         {
           ({ pos, onRef }) =>
-            <Text x={pos.x} y={pos.y} onRef={onRef} text="Drifting component" className="title" />
+            <Text ref={ref} text="Drifting component" className="title" />
         }
-      </DriftingComponent>
+      </Drifting>
     </Wrapper>
   );
 }
@@ -46,17 +46,16 @@ Please clone the repo and run `npm run storybook` or `yarn storybook` to show ex
 
 ## Usage (API)
 
-The `DriftingComponent` component has a few properties, as described below.
+The `Drifting` component has a few properties, as described below.
 
 > NOTE: this component uses rAF(requestAnimationFrame) if you need to support old browsers ensure that you are using polyfill for rAF!
 
-| Property | Type | Defaut | Description |
-| -------- | ---- | -------- | ----------- |
-| `reverse` | `boolean` | `false` | Reverse drifting |
-| `children` | `function` | `({ pos: { x, y } }, onRef: () => ref)` | A function that gets an object with `pos` and `onRef` keys as an argument. Pos contains `x: number` and `y: number`, this numbers should pass to your component style to allow drift. `onRef` it is function which should be passed to `ref` of  your component |
-| `maxRange` | `number` | `null` | Max drift range. |
-| `maxMobileRange` | `number` | `null` | Max drift range for mobile devices. |
-
+| Property              | Type       | Defaut                                  | Description                                                                                                                                                                                                                                                    |
+| --------------------- | ---------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `reverse`             | `boolean`  | `false`                                 | Reverse drifting                                                                                                                                                                                                                                               |
+| `children`            | `function` | `({ pos: { x, y } }, onRef: () => ref)` | A function that gets an object with `pos` and `onRef` keys as an argument. Pos contains `x: number` and `y: number`, this numbers should pass to your component style to allow drift. `onRef` it is function which should be passed to `ref` of your component |
+| `maxMouseRange`       | `number`   | `null`                                  | Max mouse drift range.                                                                                                                                                                                                                                         |
+| `maxOrientationRange` | `number`   | `maxMouseRange`                         | Max orientation drift range. devices.                                                                                                                                                                                                                          |
 
 ## Contributing
 

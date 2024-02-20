@@ -1,16 +1,8 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["eslint-config-airbnb"],
-  "plugins": ["import", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  "plugins": ["@typescript-eslint/eslint-plugin"],
   "rules": {
-    "global-require": 0,
-    "react/sort-comp": 0,
-    "no-mixed-operators": 0,
-    "react/jsx-filename-extension": 0,
-    "import/no-extraneous-dependencies": 0
+    "quotes": ["error", "single"],
   },
-  "env": {
-    "es6": true,
-    "browser": true
-  }
 }

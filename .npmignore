@@ -1,6 +1,11 @@
 src
-.babelrc
+demo
+build/drifting.story.js
+build/tsconfig.build.tsbuildinfo
 .eslintrc
 .storybook
 .eslintignore
 .editorconfig
+.gitignore
+.prettierrc
+tsconfig.build.json
